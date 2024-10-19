@@ -41,3 +41,43 @@ public:
     }
 
 };
+
+class Library {
+private:
+    vector<Book> books;  // Collection of books in the library
+
+public:
+
+    // Add a new book to the library
+    void addBook(const Book& book) {
+        books.push_back(book);
+        cout << "Book '" << book.getBookTitle() << "' added to the library.\n";
+    }
+
+    // Find a book in the library by title
+    void findBook(const string& title) {
+        for (const Book& book : books) {
+            if (book.getBookTitle() == title) {
+                cout << "Book found: " << book.getBookTitle() << " by " << book.getAuthor() << endl;
+                cout << "Availability: " << (book.isAvailable() ? "Available" : "Not Available") << endl;
+                return;
+            }
+        }
+        cout << "Book '" << title << "' not found in the library.\n";
+    }
+
+    // Remove a book from the library
+    void removeBook(const string& title) {
+        for (size_t i = 0; i < books.size(); i++) {
+            if (books[i].getBookTitle() == title) {
+                books.erase(books.begin() + i);
+                cout << "Book '" << title << "' removed from the library.\n";
+                return;
+            }
+        }
+        cout << "Book '" << title << "' not found, so cannot be removed.\n";
+    }
+
+
+};
+
