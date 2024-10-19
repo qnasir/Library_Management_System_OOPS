@@ -9,6 +9,11 @@ private:
     bool available;
 
 public:
+    // Default Constructor
+    Book() : bookTitle("Unknown"), author("Unknown"), available(true) {}
+
+    // Parameterized Constructor
+    Book(string title, string authorName) : bookTitle(title), author(authorName), available(true) {}
 
     // Accessor (Getter) for bookTitle
     string getBookTitle() const {
@@ -40,6 +45,10 @@ public:
         available = status;
     }
 
+    // Destructor
+    ~Book() {
+        cout << "Book '" << bookTitle << "' by " << author << " is being removed from memory.\n";
+    }
 };
 
 class Library {
@@ -47,6 +56,8 @@ private:
     vector<Book> books;  // Collection of books in the library
 
 public:
+    // Default Constructor
+    Library() {}
 
     // Add a new book to the library
     void addBook(const Book& book) {
@@ -78,6 +89,32 @@ public:
         cout << "Book '" << title << "' not found, so cannot be removed.\n";
     }
 
-
+    // Destructor
+    ~Library() {
+        cout << "Library is being closed. Cleaning up resources...\n";
+    }
 };
 
+int main() {
+    // Create a Library object
+    Library myLibrary;
+
+    // Create Book objects using different constructors
+    Book book1("The Catcher in the Rye", "J.D. Salinger");
+    Book book2("To Kill a Mockingbird", "Harper Lee");
+
+    // Add books to the library
+    myLibrary.addBook(book1);
+    myLibrary.addBook(book2);
+
+    // Find a book in the library
+    myLibrary.findBook("The Catcher in the Rye");
+
+    // Remove a book from the library
+    myLibrary.removeBook("To Kill a Mockingbird");
+
+    // Try to find a book that was removed
+    myLibrary.findBook("To Kill a Mockingbird");
+
+    return 0;
+}
